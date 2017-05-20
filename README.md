@@ -9,3 +9,6 @@ my i3wm theme
 * playerctl
 * pactl
 * feh
+
+## installation
+copy the files in your home directory in the corresponding folders.
