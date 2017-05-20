@@ -199,11 +199,9 @@ bindsym $mod+shift+x exec i3lock --color 475263
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show run
-#		 -hide-scrollbar \
-#		 -color-normal "#222222, #b1b4b3, #222222, #005577, #b1b4b3" \
-#		 -color-active "#222222, #b1b4b3, #222222, #007763, #b1b4b3" \
-#		 -color-urgent "#222222, #b1b4b3, #222222, #77003d, #b1b4b3"
 
+#print screen
+bindsym 0xff61 exec scrot -e 'mkdir -p ~/Pictures/screen && mv $f ~/Pictures/screen/'
 
 exec_always feh --bg-scale /home/leon/Pictures/background.png
 exec compton -f
