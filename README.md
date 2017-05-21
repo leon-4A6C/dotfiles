@@ -12,6 +12,7 @@ my i3wm theme
 * scrot
 * lxappearance
 * compton
+* amixer
 
 ## installation
 copy the files in your home directory in the corresponding folders.
