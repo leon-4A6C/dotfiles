@@ -1,11 +1,14 @@
 # dotfiles
-my i3wm theme
+my i3-gaps theme
 
-## dependencies
+## stuff to install
 * rofi
-* i3lock
-* i3blocks
-* xfce4-terminal
+* -i3lock
+* +i3-lock-fancy/lock
+* -i3blocks
+* +polybar
+* -xfce4-terminal
+* +termite
 * playerctl
 * pulseaudio
 * feh
