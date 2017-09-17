@@ -184,23 +184,25 @@ gaps outer -4
 new_window normal
 hide_edge_borders vertical
 bindsym Control+Shift+x [class="^.*"] border toggle
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 4
 for_window [class="Lxappearance"] border normal
-for_window [class="Vlc"] border pixel 0
-for_window [class="Firefox"] border pixel 0
+for_window [class="Vlc"] border pixel normal
+for_window [class="Firefox"] border pixel normal
 
-set $bg-color 	         #2f343f
-set $inactive-bg-color   #2f343f
+set $bg-color 	         #aeede2
+set $inactive-bg-color   #5b817b
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
+set $indicator		 #000000
+
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.urgent 		$urgent-bg-color    $urgent-bg-color   $text-color	    #00ff00
+client.focused          $bg-color           $bg-color          $text-color          $indicator
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator
+client.urgent 		$urgent-bg-color    $urgent-bg-color   $text-color	    $indicator
 
 # bar {
 	# remove it for polybar
@@ -216,6 +218,10 @@ client.urgent 		$urgent-bg-color    $urgent-bg-color   $text-color	    #00ff00
 #	}
 #}
 
+bar {
+    i3bar_command $HOME/.config/polybar/launch.sh
+}
+
 #i3lock
 bindsym $mod+shift+x exec lock -gf SFNS-Display -- scrot -z
 
@@ -226,5 +232,7 @@ bindsym $mod+d exec rofi -show run
 bindsym 0xff61 exec scrot -e 'mkdir -p ~/Pictures/screen && mv $f ~/Pictures/screen/'
 
 exec_always --no-startup-id feh --bg-scale /home/leon/Pictures/background.jpg
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec compton -f --config ~/.config/compton.conf
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id compton -f
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s off

@@ -1,71 +1,113 @@
-[global/wm]
-#margin-top = 8
-#margin-bottom = 8
-#margin-left = 8
-#margin-right = 8
-
-
 [colors]
-;orange = #FF6200
-;orange = #d65d0e
-darkgray = ${xrdb:color8}
-orange = ${xrdb:color9}
-white = #ebdbb2
-gray = #585858
-black = #090909
-red = #c795ae
-blue = #95aec7
-yellow = #c7ae95
-green = #aec795
-#background = #1f222d
-background = #262626
-background-alt = #4e4e4e
-foreground = #dfdfdf
-#foreground = ${xrdb:foreground}
-foreground-alt = #4e4e4e
-primary = #1f222d
-secondary = #FF6200
-alert = #fb4934
+background = #00000000
+foreground = #fff
+foreground-alt = #abc
+i3-urgent = #bd2c40
 
-[bar/bar]
-;monitor = ${env:MONITOR:HDMI-4}
-width = 100%
-height = 21
-;offset-x = 1%
-;offset-y = 1%
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[bar/top]
+monitor = HDMI-0
+monitor-strict = false
+
+bottom = false
 fixed-center = true
 
-locale = en_US.UTF-8
+width = 100%
+height = 25
 
-enable-ipc = true
-
-padding-left = 6
-padding-right = 0
-
-module-margin-left = 0
-module-margin-right = 0
-
-modules-right = pkg separator cpu separator memory separator volume separator date separator powermenu
-modules-center = i3
-modules-left = vlc
+offset-x = 0
+offset-y = 0
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-underline-size = 2
-underline-color = ${colors.white}
+; background-0 = #000000
+; background-1 = #000000
+; background-2 = #000000
+; background-3 = #000000
+; background-4 = #000000
+; background-5 = #000000
+; background-6 = #000000
+; background-7 = #000000
+; background-8 = #000000
+; background-9 = #000000
 
-tray-detached = true
+padding = 1
+module-margin = 1
+
+font-0 = RobotoMono Nerd Font:size=11
+font-1 = FontAwesome:size=15
+font-2 = Material Icons:size=13
+
+modules-left = pkg volume backlight
+modules-center = vlc
+modules-right = date
+separator = | 
+
+locale = en_US.UTF-8
+
 tray-position = left
+tray-detached = false
+tray-maxsize = 3
+tray-transparent = true
+tray-background = ${root.background}
 tray-offset-x = 0
 tray-offset-y = 0
-;tray-maxsize = 16
-tray-padding = 2
-tray-transparent = false
+tray-padding = 1
 tray-scale = 1.0
 
-font-0 = "monospace:size=10;2"
-font-1 = "FontAwesome:size=10;2"
+wm-restack = i3
+override-redirect = false
+
+enable-ipc = false
+
+[bar/bottom]
+monitor = HDMI-0
+monitor-strict = false
+
+bottom = true
+fixed-center = true
+
+width = 100%
+height = 24
+
+offset-x = 0
+offset-y = 0
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; background-0 = #000000
+; background-1 = #000000
+; background-2 = #000000
+; background-3 = #000000
+; background-4 = #000000
+; background-5 = #000000
+; background-6 = #000000
+; background-7 = #000000
+; background-8 = #000000
+; background-9 = #000000
+
+padding = 1
+module-margin = 1
+
+font-0 = RobotoMono Nerd Font:size=11
+font-1 = FontAwesome:size=15
+
+modules-left = battery
+modules-center = i3
+modules-right = powermenu
+separator = | 
+
+locale = en_US.UTF-8
+
+wm-restack = i3
+override-redirect = false
+
+enable-ipc = false
 
 [module/vlc]
 type = custom/script
@@ -77,105 +119,37 @@ click-right = playerctl play-pause
 scroll-up = playerctl next
 scroll-down = playerctl previous
 
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = false
-wrapping-scroll = false
-
-#label-focused = %icon%
-;label-focused-font = 1
-label-focused-background = ${colors.background-alt}
-;label-focused-underline= ${colors.primary}
-label-focused-underline= ${colors.white}
-label-visible-underline = ${colors.foreground}
-label-focused-padding-left = 0
-label-focused-padding-right = 1
-
-label-unfocused-padding-right = 1
-label-unfocused-padding-left = 0
-
-label-occupied = %icon%
-label-occupied-foreground = ${colors.darkgray}
-label-occupied-padding = 2
-
-label-urgent = %icon%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %icon%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
-
 [module/date]
 type = internal/date
-date-alt =   %A, %d %B %Y %H:%M:%S
-date =  %H:%M:%S
+date = %A, %d %B %Y %H:%M:%S
+date-alt = %H:%M:%S
 interval = 1
 ;format-underline = ${colors.white}
 ;format-background = ${colors.black}
 format-foreground = ${colors.foreground}
-format-padding = 1
+format-padding = 0
 
 label-separator = |
 
-[module/volume]
-type = internal/volume
+[module/pkg]
+type = custom/script
+interval = 8
+exec = ~/.config/polybar/pkg.sh
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
-label-padding = 2
+[module/powermenu]
+type = custom/menu
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.white}
-label-muted = sound muted
-format-padding = 2
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
-
-format-muted-padding = 1
-format-volume-padding = 1
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = #928374
-;format-underline = #f90000
-label = %percentage%%
-label-foreground = ${root.foreground}
-format-padding = 1
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = #928374
-;format-underline = #4bffdc
-label = %percentage_used%%
-label-foreground = ${root.foreground}
-format-padding = 1
-
-[module/separator]
-type = custom/text
-content = |
-content-foreground = #4e4e4e
+format-spacing = 1
+label-open = 
+label-open-foreground = ${colors.foreground}
+label-close = cancel
+label-close-foreground = ${colors.foreground}
+label-separator = |
+label-separator-foreground = ${colors.foreground}
+menu-0-0 = reboot
+menu-0-0-exec = reboot
+menu-0-1 = power off
+menu-0-1-exec = poweroff
 
 [module/battery]
 type = internal/battery
@@ -190,58 +164,64 @@ label-discharging = %percentage%%
 
 format-full = <label-full>
 format-full-prefix = 
-format-full-prefix-foreground = #55aa55
+format-full-prefix-foreground = ${colors.foreground}
 
 ramp-capacity-0 =  
 ramp-capacity-1 =  
 ramp-capacity-2 =  
-ramp-capacity-0-foreground = ${colors.red}
-ramp-capacity-1-foreground = ${colors.white}
-ramp-capacity-2-foreground = #55aa55
+ramp-capacity-0-foreground = ${colors.foreground}
+ramp-capacity-1-foreground = ${colors.foreground}
+ramp-capacity-2-foreground = ${colors.foreground}
 
 animation-charging-0 =  
 animation-charging-1 =  
 animation-charging-2 =  
-animation-charging-foreground = #55aa55
+animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
 
 format-full-padding = 1
 format-charging-padding = 1
 format-discharging-padding = 1
 
-[module/powermenu]
-type = custom/menu
+[module/volume]
+type = internal/volume
+mapped = true
 
-format-spacing = 1
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close = cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
+format-volume = <ramp-volume>
+ramp-volume-0 = 
+ramp-volume-1 = 
 
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = reboot
+label-muted = 
 
-menu-2-0 = power off
-menu-2-0-exec = poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+[module/i3]
+type = internal/i3
 
-[module/pkg]
-type = custom/script
-interval = 8
-exec = ~/.config/polybar/pkg.sh
+strip-wsnumbers = true
+index-sort = true
 
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
+enable-click = true
+enable-scroll = true
+wrapping-scroll = false
+reverse-scroll = false
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = #e60053
+
+label-focused = %name%
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 2
+
+label-urgent-foreground = ${colors.foreground}
+label-urgent-background = ${colors.i3-urgent}
+
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = acpi_video0
+
+label = 
